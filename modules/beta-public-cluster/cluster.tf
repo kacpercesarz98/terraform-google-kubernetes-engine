@@ -524,7 +524,7 @@ resource "google_container_node_pool" "pools" {
   }
 
   dynamic "private_cluster_config" {
-    for_each = var.enable_private_nodes ? [{
+    for_each = lookup(network_config.value, "enable_private_nodes", null) ? [{
       master_ipv4_cidr_block  = var.master_ipv4_cidr_block
     }] : []
 
